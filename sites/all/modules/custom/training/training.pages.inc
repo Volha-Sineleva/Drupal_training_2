@@ -104,15 +104,19 @@ function training_default_arg_page($arg){
     case 1:
       return 'one';
       break;
+
     case 2:
       return 'two';
       break;
+
     case 3:
       return 'three';
       break;
+
     case 99:
       return 'Almost there';
       break;
+
     default:
       return '404 page is not found';
   }
@@ -148,15 +152,20 @@ function training_title_title(){
  * @throws \Exception
  */
 function training_theme_page($atr = 'parent'){
-  $links = array('list','table','image','access');
+  $links = array(
+    'List' => 'list',
+    'Table' => 'table',
+    'Image' => 'image',
+    'Access' => 'access'
+  );
   if ($atr == 'parent'){
     foreach ($links as &$link){
       $link = 'theme/' . $link;
     }
   }
+
   return theme('training_theme',array(
     'title' => 'Links to themes',
-    'items' => array('List','Table','image','Access'),
     'links' => $links,
   ));
 }
@@ -177,7 +186,7 @@ function training_theme_table_page(){
     array(
       'data'=> array(
         '11',
-        array('data'=>'12','colspan'=>2),
+        array('data' => '12','colspan' => 2),
       ),
       'class' => array('rowClass')),
     array(
@@ -192,7 +201,7 @@ function training_theme_table_page(){
   return $title . theme('table',[
     'header' => $header,
     'rows' => $rows,
-    'attributes' => array('id' =>'table-test'),
+    'attributes' => array('id' => 'table-test'),
   ]);
 }
 
@@ -212,7 +221,7 @@ function training_theme_image_page(){
     $styles_with_images[] = '<li>' . $style['label'] . '</li>'
       . theme('image_style',array(
         'style_name' => $i,
-        'path'=> $path,
+        'path' => $path,
       ));
   }
 
@@ -233,9 +242,8 @@ function training_theme_image_page(){
  * @return string
  */
 function training_theme_access_page(){
-  global $user;
-  $text = user_access('custom access training')?
-    t('Custom access for rendered content') :
-    t('Custom access inversed for rendered content');
+  $access = t('Custom access for rendered content');
+  $no_access = t('Custom access inversed for rendered content');
+  $text = user_access('custom access training') ? $access : $no_access;
   return $text;
 }

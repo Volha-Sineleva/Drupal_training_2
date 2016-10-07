@@ -1,8 +1,9 @@
 <?php
 
 /**
-* Implements hook_menu().
-*/
+ * Implements hook_menu().
+ */
+
 function training_menu(){
   $menu['menu'] = array(
     'title' => 'Training Landing Page',
@@ -15,14 +16,14 @@ function training_menu(){
   $menu['menu/custom_access'] = array(
     'title' => 'Custom Access Menu Item',
     'page callback' => 'training_access_page',
-    'access arguments' => ['custom access training'],
+    'access arguments' => array('custom access training',),
     'file' => 'training.pages.inc',
   );
 
   $menu['menu/permissioned'] = array(
     'title' => 'Permissioned Menu Item',
     'page callback' => 'training_permissioned_page',
-    'access arguments' => ['permissioned access training'],
+    'access arguments' => array('permissioned access training',),
     'file' => 'training.pages.inc',
   );
 
@@ -81,7 +82,7 @@ function training_menu(){
   $menu['menu/tabs/default/second'] = array(
     'title' => 'Second',
     'page callback' => 'training_tab_num_page',
-    'page arguments' => array(3,'1'),
+    'page arguments' => array(3,'1',),
     'access callback' => TRUE,
     'file' => 'training.pages.inc',
     'weight' => -2,
