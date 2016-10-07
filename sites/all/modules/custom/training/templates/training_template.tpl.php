@@ -3,12 +3,11 @@
 /**
  * @file
  * Displays a page element (list)
- * Called from function training_theme()
  *
- * Available variables (created in function training_theme_page):
- * - $title: List title
- * - $links array: Links
- * - $items array: Names of link
+ * Available variables:
+ * - $title: List title.
+ * - $links: Links array.
+ * - $items: Array of links' names.
  */
 ?>
 
@@ -16,8 +15,9 @@
 
 <?php
   $list = '';
-  foreach ($links as $name=>$link){
-    $list .= '<li><a href="' . $link . '">' . $name . '</a></li>';
+  foreach ($links as $link){
+    $list .= '<li>' . $link . '</li>';
   }
   $list .= '</ul>';
-  echo $list;
+
+  print ($list);

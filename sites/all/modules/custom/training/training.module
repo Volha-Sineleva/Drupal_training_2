@@ -3,7 +3,6 @@
 /**
  * Implements hook_menu().
  */
-
 function training_menu(){
   $menu['menu'] = array(
     'title' => 'Training Landing Page',
@@ -16,14 +15,14 @@ function training_menu(){
   $menu['menu/custom_access'] = array(
     'title' => 'Custom Access Menu Item',
     'page callback' => 'training_access_page',
-    'access arguments' => array('custom access training',),
+    'access arguments' => array('custom access training'),
     'file' => 'training.pages.inc',
   );
 
   $menu['menu/permissioned'] = array(
     'title' => 'Permissioned Menu Item',
     'page callback' => 'training_permissioned_page',
-    'access arguments' => array('permissioned access training',),
+    'access arguments' => array('permissioned access training'),
     'file' => 'training.pages.inc',
   );
 
@@ -52,7 +51,7 @@ function training_menu(){
   $menu['menu/tabs/second'] = array(
     'title' => 'Second',
     'page callback' => 'training_tab_num_page',
-    'page arguments' => array(2,),
+    'page arguments' => array(2),
     'access callback' => TRUE,
     'file' => 'training.pages.inc',
     'weight'=> -9,
@@ -62,7 +61,7 @@ function training_menu(){
   $menu['menu/tabs/third'] = array(
     'title' => 'Third',
     'page callback' => 'training_tab_num_page',
-    'page arguments' =>  array(2,),
+    'page arguments' =>  array(2),
     'access callback' => TRUE,
     'file' => 'training.pages.inc',
     'weight' => -8,
@@ -72,7 +71,7 @@ function training_menu(){
   $menu['menu/tabs/forth'] = array(
     'title' => 'Forth',
     'page callback' => 'training_tab_num_page',
-    'page arguments' =>  array(2,),
+    'page arguments' =>  array(2),
     'access callback' => TRUE,
     'file' => 'training.pages.inc',
     'weight' => -7,
@@ -122,7 +121,7 @@ function training_menu(){
     'title' => 'Placeholder',
     'access callback' => TRUE,
     'page callback' => 'training_placeholder_page',
-    'page arguments' => array(2,),
+    'page arguments' => array(2),
     'file' => 'training.pages.inc',
   );
 
@@ -134,7 +133,7 @@ function training_menu(){
   $menu['menu/default_arg/%'] = array(
     'title' => 'Placeholder',
     'page callback' => 'training_default_arg_page',
-    'page arguments' => array(2,),
+    'page arguments' => array(2),
     'access callback' => TRUE,
     'file' => 'training.pages.inc',
   );
@@ -162,7 +161,7 @@ function training_menu(){
   $menu['theme/link'] = array(
     'title' => 'Theme List',
     'page callback' => 'training_theme_page',
-    'page arguments'=> array('child',),
+    'page arguments'=> array('child'),
     'access callback' => TRUE,
     'file' => 'training.pages.inc',
     'weight' => -10,
@@ -195,13 +194,12 @@ function training_menu(){
 }
 
 /**
-*Implements hook_theme().
-*/
+ *Implements hook_theme().
+ */
 function training_theme(){
   $theme['training_theme'] = array(
     'variables' => array(
       'title' => NULL,
-      'items' => NULL,
       'links' => NULL,
     ),
    'template' => 'templates/training_template',
@@ -210,9 +208,13 @@ function training_theme(){
   return $theme;
 }
 
+/**
+ * Theme function to create list of links to be themed by training_theme
+ *
+ * @param $variables
+ */
 function theme_training_theme($variables){
   $title = $variables['title'];
-  $items = $variables['items'];
   $links = $variables['links'];
 }
 

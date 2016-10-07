@@ -102,24 +102,26 @@ function training_placeholder_page($smth){
 function training_default_arg_page($arg){
   switch ($arg) {
     case 1:
-      return 'one';
+      $output = 'one';
       break;
 
     case 2:
-      return 'two';
+      $output = 'two';
       break;
 
     case 3:
-      return 'three';
+      $output = 'three';
       break;
 
     case 99:
-      return 'Almost there';
+      $output = 'Almost there';
       break;
 
     default:
-      return '404 page is not found';
+      $output = '404 page is not found';
   }
+
+  return ($output);
 }
 
 /**
@@ -153,15 +155,13 @@ function training_title_title(){
  */
 function training_theme_page($atr = 'parent'){
   $links = array(
-    'List' => 'list',
-    'Table' => 'table',
-    'Image' => 'image',
-    'Access' => 'access'
+    'List' => 'theme/list',
+    'Table' => 'theme/table',
+    'Image' => 'theme/image',
+    'Access' => 'theme/access',
   );
-  if ($atr == 'parent'){
-    foreach ($links as &$link){
-      $link = 'theme/' . $link;
-    }
+  foreach ($links as $name => &$link){
+    $link = l($name,$link);
   }
 
   return theme('training_theme',array(
@@ -214,10 +214,10 @@ function training_theme_table_page(){
  */
 function training_theme_image_page(){
   $path =  drupal_get_path('module', 'training') . '/image/sample.png';
-  $ar = image_styles();
-  $keys = array_keys($ar);
+  $image_styles = image_styles();
+  $keys = array_keys($image_styles);
 
-  foreach ($ar as $i => $style){
+  foreach ($image_styles as $i => $style){
     $styles_with_images[] = '<li>' . $style['label'] . '</li>'
       . theme('image_style',array(
         'style_name' => $i,
@@ -225,14 +225,14 @@ function training_theme_image_page(){
       ));
   }
 
-  $style_list_title = '<h3>' . t('Available styles for image:') . '</h3>';
-  $text = $style_list_title . '<ul>' . implode($styles_with_images) . '</ul>';
+  $style_list_title = '<h3>' . t('Available styles for image:') . '</h3>' .
+    '<ul>' . implode($styles_with_images) . '</ul>';
 
   return theme('image',array(
     'path'=> $path,
     'width' => '50%',
     'attributes'=> array('class'=>'simple-image',),
-  )) . $text;
+  )) . $style_list_title;
 }
 
 /**
@@ -244,6 +244,10 @@ function training_theme_image_page(){
 function training_theme_access_page(){
   $access = t('Custom access for rendered content');
   $no_access = t('Custom access inversed for rendered content');
-  $text = user_access('custom access training') ? $access : $no_access;
-  return $text;
+  if (user_access('custom_access_training')){
+    return $access;
+  }
+  else {
+    return $no_access;
+  }
 }
